@@ -1,0 +1,152 @@
+/* Space out content a bit */
+body {
+  padding-top: 70px;
+  padding-bottom: 20px;
+  font-family: "Raleway";
+
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.project-header {
+  padding-bottom: 15px
+}
+
+.project-title{
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.project-date {
+  color: #7f7f7f;
+  font-weight: lighter;
+  font-size: 12px
+}
+
+.project {
+  padding-bottom: 20px
+}
+
+/* Custom page header */
+.header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+.title h1 {
+  /*font-weight: 900;*/
+  font-size: 36px;
+}
+
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 786px) {
+  .container {
+    max-width: 786px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.about h4 {
+  font-weight: bolder;
+  font-size: 25px;
+}
+.about p {
+  font-size: 16px;
+  font-weight: lighter;
+  text-indent: 5%;
+}
+
+.social-media-buttons{
+  padding-top: 5px;
+}
+
+.vert-align {
+  float:none;
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:-4px;
+}
+
+/* Main marketing message and sign up button */
+.headshot {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 30px
+}
+
+/* Supporting marketing content */
+/*.marketing {
+  margin: 40px 0;
+}*/
+.marketing p + h4 {
+  margin-top: 28px;
+}
+.profile {
+  max-width: 40%;
+  border: 2px solid #000000;
+}
+
+.project-date{
+  text-align: left;
+}
+
+.benjamin {
+  font-weight: lighter;
+  color: #7f7f7f
+}
+
+.congdon {
+  font-weight: bolder;
+  color: #000000
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 786px) {
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .header {
+    margin-bottom: 30px;
+  }
+  .headshot {
+    border-bottom: 0;
+  }
+  .profile{
+    max-width:40%;
+    color: #000000
+  }
+}
+
+@media screen and (min-width: 1000px){
+  .profile{
+    max-width:60%;
+  }
+  .project-date{
+    text-align: right;
+  }
+}
