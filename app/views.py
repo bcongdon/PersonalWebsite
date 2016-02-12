@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template
 from fitbit import step_getter
+from wunderlist import wunderlist_downloader
 
 @app.route('/')
 @app.route('/index')
@@ -13,4 +14,6 @@ def stats():
 	locale.setlocale(locale.LC_ALL, 'en_US')
 	steps = step_getter.StepGetter().get_steps_since('2015-08-19')
 
-	return "Steps: " + str(locale.format("%d", steps, grouping=True))
+	tasks = wunderlist_downloader.Wunderlist().get_college_tasks()
+
+	return "Steps: " + str(locale.format("%d", steps, grouping=True)) + "<br> Tasks: " + str(tasks)

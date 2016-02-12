@@ -3,79 +3,69 @@ import csv
 import json
 import datetime
 import sys
+import os
 
-def main():
-    #Define standard date format
-    date_format = "%Y-%m-%d"
+class Wunderlist():
+    result = None
+    def __init__(self):
+        pass
+        
+    def get_college_tasks(self):
+        if self.result == None:
+            self.result = self.get_completed_tasks_after(datetime.datetime(year = 2015, month = 8, day = 20))
+        return self.result
 
-    #Initialize Wunderpy2 API
-    api = wunderpy2.WunderApi()
+    def get_completed_tasks_after(self, startdate):
+        #Define standard date format
+        date_format = "%Y-%m-%d"
 
-    #Open auth file and initialize client
-    try:
-        with open("wunderlist_auth.json","r") as f:
-            js = json.loads(f.read())
-            access_token = js['access_token']
-            client_id = js['client_id']
-            personal_id = None
-            if 'personal_id' in js.keys():
-                personal_id = js['personal_id']
-    except Exception as e:
-        print e
-        print "ERROR: Perhaps you didn't rename \"wunderlist_auth_sample.json\" to \"wunderlist_auth.json\"?"
-        sys.exit(0)
-    client = api.get_client(access_token, client_id)
-    print "** Client Initialized"
+        #Initialize Wunderpy2 API
+        api = wunderpy2.WunderApi()
 
-    #Pull down all lists
-    wunderlists = client.get_lists()
-    print "** List of Lists Pulled"
+        #Open auth file and initialize client
+        try:
+            path = os.path.join(os.getcwd(),"app","wunderlist","wunderlist_auth.json")
+            with open(path,"r") as f:
+                js = json.loads(f.read())
+                access_token = js['access_token']
+                client_id = js['client_id']
+                personal_id = None
+                if 'personal_id' in js.keys():
+                    personal_id = js['personal_id']
+        except Exception as e:
+            print e
+            print "ERROR: Perhaps you didn't rename \"wunderlist_auth_sample.json\" to \"wunderlist_auth.json\"?"
+            return 0
 
-    all_completed_tasks = list()
-    list_tasks = list()
-    for list_ in wunderlists:
-        completed = client.get_tasks(list_['id'], completed=True)
-        all_completed_tasks += completed
-        list_tasks.append(completed)
-        print "Pulled \"" + str(list_['title']) + "\""
+        client = api.get_client(access_token, client_id)
+        print "** Client Initialized"
 
-    #If personal_id is defined in wunderlist_auth, remove all tasks not completed by that ID
-    if personal_id is not None:
-        all_completed_tasks = [task for task in all_completed_tasks if 'completed_by_id' in task.keys() and task['completed_by_id'] == personal_id]
-        new_list_tasks = list()
-        for _list in list_tasks:
-            new_list_tasks.append([task for task in _list if 'completed_by_id' in task.keys() and task['completed_by_id'] == personal_id])
-        list_tasks = new_list_tasks
+        #Pull down all lists
+        wunderlists = client.get_lists()
+        print "** List of Lists Pulled"
 
-    #Sort completed tasks by completion date
-    all_completed_tasks = sorted(all_completed_tasks, key=lambda task: task['completed_at'])
+        all_completed_tasks = list()
+        list_tasks = list()
+        for list_ in wunderlists:
+            completed = client.get_tasks(list_['id'], completed=True)
+            all_completed_tasks += completed
+            list_tasks.append(completed)
+            print "Pulled \"" + str(list_['title']) + "\""
 
-    #Strip the completion start/end dates into datetimes
-    min_date = datetime.datetime.strptime(all_completed_tasks[0]['completed_at'][:10],date_format)
-    max_date = datetime.datetime.strptime(all_completed_tasks[len(all_completed_tasks) - 1]['completed_at'][:10],date_format)
+        #If personal_id is defined in wunderlist_auth, remove all tasks not completed by that ID
+        if personal_id is not None:
+            all_completed_tasks = [task for task in all_completed_tasks if 'completed_by_id' in task.keys() and task['completed_by_id'] == personal_id]
+            new_list_tasks = list()
+            for _list in list_tasks:
+                new_list_tasks.append([task for task in _list if 'completed_by_id' in task.keys() and task['completed_by_id'] == personal_id])
+            list_tasks = new_list_tasks
 
-    min_date = datetime.datetime(year=2015, month=8, day=20)
-    print len([f for f in all_completed_tasks if datetime.datetime.strptime(f['completed_at'][:10],date_format) > min_date])
-    # #Setup CSV file
-    # with open('output.csv','wb') as csvfile:
-    #     #Setup CSV writer
-    #     csv_writer = csv.writer(csvfile,dialect='excel')
+        #Sort completed tasks by completion date
+        all_completed_tasks = sorted(all_completed_tasks, key=lambda task: task['completed_at'])
 
-    #     #Write title row
-    #     csv_writer.writerow(['Date','Total'] + [_list['title'] for _list in wunderlists])
-    #     d = min_date
-    #     delta = datetime.timedelta(days=1)
-    #     while d <= max_date:
-    #         #Format the datetime to readable string
-    #         d_str = d.date().strftime(date_format)
+        #Strip the completion start/end dates into datetimes
+        min_date = datetime.datetime.strptime(all_completed_tasks[0]['completed_at'][:10],date_format)
+        max_date = datetime.datetime.strptime(all_completed_tasks[len(all_completed_tasks) - 1]['completed_at'][:10],date_format)
 
-    #         list_subtotals = [len([x for x in _list if x['completed_at'][:10] == d_str]) for _list in list_tasks]
-
-    #         #Write the row for specific day column
-    #         csv_writer.writerow([d_str,len([x for x in all_completed_tasks if x['completed_at'][:10] == d_str])]
-    #             + list_subtotals)
-
-    #         #Iterate current date by 1 day
-    #         d+= delta
-if __name__ == "__main__":
-    main()
+        min_date = startdate
+        return len([f for f in all_completed_tasks if datetime.datetime.strptime(f['completed_at'][:10],date_format) > min_date])
