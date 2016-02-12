@@ -1,3 +1,4 @@
 flask_env
 app_settings.txt
 user_settings.txt
+wunderlist_auth.json
