@@ -1,6 +1,6 @@
 /* Space out content a bit */
 body {
-  padding-top: 70px;
+  padding-top: 50px;
   padding-bottom: 20px;
   font-family: "Raleway";
 
@@ -121,6 +121,12 @@ body {
   font-weight: bolder;
   color: #000000
 }
+
+.by-the-numbers {
+  font-weight: bolder;
+  font-size:20px;
+}
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 786px) {

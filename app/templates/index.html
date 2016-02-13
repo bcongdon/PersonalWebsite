@@ -31,10 +31,12 @@
     ga('create', 'UA-72102716-1', 'auto');
     ga('send', 'pageview' );
 
-    </script>
+  </script>
 
   <!-- Personal CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}">
+
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
 </head>
 
@@ -61,7 +63,8 @@
   </nav>
   <div class="container">
     <div class="row">
-      <div class="headshot col-md-6 col-xs-12 vert-align">
+      <!-- Headshot -->
+      <div class="headshot col-md-6 col-xs-12">
         <img src="{{ url_for('static', filename='img/profile.png') }}" class="img-responsive img-rounded profile center-block" alt="Profile">
         <div class="title">
           <h1><span class="benjamin">Benjamin</span> <span class="congdon">Congdon</span></h1>
@@ -82,7 +85,28 @@
           
         </div>
       </div>
-      <div class="col-md-6 col-xs-12 about vert-align">
+      <div class="col-md-6 col-xs-12 ">
+        <h3><b>>By the Numb3rs<</b></h3>
+        <p><strong>Since arriving at UIUC...</strong></p>
+        <ul style="list-style-type:none">
+          <li>... I've taken <span class="by-the-numbers">3,000,000</span> steps.</li>
+          <li>... I've completed <span class="by-the-numbers">3,000,000</span> tasks</li>
+          <li>... I've made <span class="by-the-numbers">3,000,000</span> commits to github.</li>
+          <li>... I've tweeted <span class="by-the-numbers">3,000,000</span> tweets.</li>
+          <li>... I've composed <span class="by-the-numbers">3,000,000</span> answers on Quora.</li>
+          <li>... I've taken <span class="by-the-numbers">3,000,000</span> classes.</li>
+        </ul>  
+        <p style="text-align: right"><strong>... and I'm just getting started.</strong></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 project-header">
+        
+      </div>
+    </div>
+    <div class="row">
+      <!-- About -->
+      <div class="col-md-12 col-xs-12 about vert-align">
           <h4><b>>About<</b></h4>
           <p>I am currently a student at the University of Illinois at Urbana-Champaign,
             pursuing a Bachelor's degree in Computer Science.</p>
