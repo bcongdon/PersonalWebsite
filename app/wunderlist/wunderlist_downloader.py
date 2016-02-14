@@ -24,7 +24,7 @@ class Wunderlist():
 
         #Open auth file and initialize client
         try:
-            path = os.path.join(os.getcwd(),"app","wunderlist","wunderlist_auth.json")
+            path = os.path.join(os.getcwd(),"append","wunderlist","wunderlist_auth.json")
             with open(path,"r") as f:
                 js = json.loads(f.read())
                 access_token = js['access_token']

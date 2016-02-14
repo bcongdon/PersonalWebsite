@@ -10,7 +10,10 @@ personal_stats = stats.Stats()
 @app.route('/index')
 def index():
 	global personal_stats
-	return render_template("index.html", quora_answers=personal_stats.quora_answers)
+	return render_template("index.html", 
+		quora_answers=personal_stats.quora_answers, 
+		github_commits=personal_stats.github_commits,
+		tweets=personal_stats.tweets)
 
 @app.route('/stats')
 def stats():
