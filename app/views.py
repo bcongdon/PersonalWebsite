@@ -6,6 +6,7 @@ import stats
 
 personal_stats = stats.Stats()
 
+
 @app.route('/')
 @app.route('/index')
 def index():

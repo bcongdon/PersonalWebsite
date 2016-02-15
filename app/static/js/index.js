@@ -12,3 +12,14 @@ $(document).ready(function(){
         $('.navbar').hide();
     }
 });
+
+$('#about').
+    click(function(){
+        var target = $('a[name=about]');
+        if (target.length)
+        {
+            var top = target.offset().top;
+            $('html,body').animate({scrollTop: top - 100}, 'slow');
+            return false;
+        }
+    });
