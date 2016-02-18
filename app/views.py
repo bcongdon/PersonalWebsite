@@ -25,3 +25,7 @@ def stats():
 	tasks = wunderlist_downloader.Wunderlist().get_college_tasks()
 
 	return "Steps: " + str(locale.format("%d", steps, grouping=True)) + "<br> Tasks: " + str(tasks)
+
+@app.route('/projects')
+def projects():
+	return render_template("projects.html")
