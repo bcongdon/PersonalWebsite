@@ -10,7 +10,7 @@ class Stats:
 	tweets = 0
 
 	def __init__(self):
-		self.refresh()
+		pass
 
 	def refresh(self):
 		self.quora_answers = quora.num_answers()
